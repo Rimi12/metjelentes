@@ -49,8 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Meterológiai_jelentés_feladat.pdf" />
-    <None Include="Meterológiai_jelentés_útmutató.pdf" />
+    <None Include="Meteorológiai_jelentés_feladat.pdf" />
+    <None Include="Meteorológiai_jelentés_útmutató.pdf" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
