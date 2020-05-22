@@ -31,27 +31,27 @@ namespace metjelentes
     {
         static void Main()
         {
-            List<Jelentés> jelenések = new List<Jelentés>();
-            foreach (var sor in File.ReadAllLines("tavirathu13.txt")) jelenések.Add(new Jelentés(sor));
+            List<Jelentés> jelentések = new List<Jelentés>();
+            foreach (var sor in File.ReadAllLines("tavirathu13.txt")) jelentések.Add(new Jelentés(sor));
 
             Console.WriteLine("2. feladat\nAdja meg egy település kódját! Település: ");
             string inputKód = Console.ReadLine();
-            Console.WriteLine($"Az utolsó mérési adat a megadott településről {jelenések.Where(x=> x.TelepülésKód == inputKód).Last().IdőÚj}-kor érkezett.");
+            Console.WriteLine($"Az utolsó mérési adat a megadott településről {jelentések.Where(x=> x.TelepülésKód == inputKód).Last().IdőÚj}-kor érkezett.");
 
             Console.WriteLine("3. feladat");
-            Console.WriteLine($"A legalacsonyabb hőmérséklet: {jelenések.OrderBy(x=>x.Hőmérséklet).First()}");
-            Console.WriteLine($"A legmagasabb hőmérséklet: {jelenések.OrderBy(x => x.Hőmérséklet).Last()}");
+            Console.WriteLine($"A legalacsonyabb hőmérséklet: {jelentések.OrderBy(x=>x.Hőmérséklet).First()}");
+            Console.WriteLine($"A legmagasabb hőmérséklet: {jelentések.OrderBy(x => x.Hőmérséklet).Last()}");
 
             Console.WriteLine("4. feladat");
-            var szélcsend = jelenések.Where(x => x.Szélcsend);
+            var szélcsend = jelentések.Where(x => x.Szélcsend);
             if (szélcsend.Count() != 0) Console.Write(szélcsend.Aggregate("", (c, n) => c += $"{n.TelepülésKód} {n.IdőÚj}\n"));
             else Console.WriteLine("Nem volt szélcsend a mérések idején.");
 
             Console.WriteLine("5. feladat");
-            HashSet<string> telpülésKódok = new HashSet<string>(jelenések.Select(x=>x.TelepülésKód));
+            HashSet<string> telpülésKódok = new HashSet<string>(jelentések.Select(x=>x.TelepülésKód));
             foreach (var i in telpülésKódok)
             {
-                var aktTelepülésMérései = jelenések.Where(x => x.TelepülésKód == i);
+                var aktTelepülésMérései = jelentések.Where(x => x.TelepülésKód == i);
                 int min = aktTelepülésMérései.Min(x => x.Hőmérséklet);
                 int max = aktTelepülésMérései.Max(x => x.Hőmérséklet);
                 int ingadozás = max - min;
@@ -65,7 +65,7 @@ namespace metjelentes
             foreach (var i in telpülésKódok)
             {
                 List<string> ki = new List<string>() {i};
-                foreach (var j in jelenések.Where(x => x.TelepülésKód == i))
+                foreach (var j in jelentések.Where(x => x.TelepülésKód == i))
                 {
                     ki.Add($"{j.IdőÚj} {j.ErősségHashtag}");
                 }
